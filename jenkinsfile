@@ -1,0 +1,23 @@
+pipeline {
+    agent any
+
+    stages {
+        
+        stage('Build') {
+            steps {
+                sh 'mvn install'
+            }
+        }
+        stage('rename') {
+            steps {
+                sh 'mv target/*.jar target/app.jar'
+            }
+        }
+	stage('execute') {
+	    steps{
+		sh 'java -jar target/app.jar'
+	    }
+	}
+        
+    }
+}
